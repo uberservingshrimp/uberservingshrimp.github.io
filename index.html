@@ -58,7 +58,7 @@
         if (isSignedIn) {
           listMajors();
         } else {
-          gapi.auth2.getAuthInstance().signIn();
+          gapi.auth2.getAuthInstance().signIn().catch(responseErrorHandler);
         }
       }
 
