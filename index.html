@@ -3,19 +3,133 @@
   <head>
     <title>Is Uber Serving Shrimp Today?</title>
     <meta charset="utf-8" />
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        background-color: black;
+        color: white;
+        height: 100%;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      h2 {
+        font-size: 72px;
+      }
+
+      img {
+        width: 500px;
+      }
+
+      .content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+      }
+
+      .yes {
+        align-items: center;
+        flex-direction: column;
+      }
+
+      /* Loader styles */
+      .loader {
+        color: #ffffff;
+        font-size: 20px;
+        margin: 100px auto;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        position: relative;
+        text-indent: -9999em;
+        -webkit-animation: load4 1.3s infinite linear;
+        animation: load4 1.3s infinite linear;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+
+      @-webkit-keyframes load4 {
+        0%,
+        100% {
+          box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+        }
+        12.5% {
+          box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+        }
+        25% {
+          box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+        }
+        37.5% {
+          box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+        }
+        50% {
+          box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+        }
+        62.5% {
+          box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+        }
+        75% {
+          box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+        }
+        87.5% {
+          box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+        }
+      }
+
+      @keyframes load4 {
+        0%,
+        100% {
+          box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+        }
+        12.5% {
+          box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+        }
+        25% {
+          box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+        }
+        37.5% {
+          box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+        }
+        50% {
+          box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+        }
+        62.5% {
+          box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+        }
+        75% {
+          box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+        }
+        87.5% {
+          box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+        }
+      }
+    </style>
   </head>
   <body>
-    <p>Is Uber Serving Shrimp Today?</p>
+    <div class="content">
+      <h2>Is Uber Serving Shrimp Today?</h2>
 
-    <div id="yes" style="display: none;">
-      <h1>YES</h1>
+      <div class="loader" id="loader"></div>
+
+      <div class="yes" id="yes" style="display: none;">
+        <h1>YES</h1>
+        <img src="deadshrimp.jpg" />
+      </div>
+
+      <div id="no" style="display: none;">
+        <h1>NO</h1>
+      </div>
     </div>
 
-    <div id="no" style="display: none;">
-      <h1>NO</h1>
-    </div>
-
-    <pre id="content" style="white-space: pre-wrap;"></pre>
+    <pre id="messages" style="white-space: pre-wrap;"></pre>
 
     <script type="text/javascript">
       // Nothing to see here
@@ -32,6 +146,7 @@
 
       var yesBlock = document.getElementById('yes');
       var noBlock = document.getElementById('no');
+      var loader = document.getElementById('loader');
 
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
@@ -50,7 +165,7 @@
 
           updateSigninStatus(isSignedIn);
         }, function(error) {
-          appendPre(JSON.stringify(error, null, 2));
+          appendMessage(JSON.stringify(error, null, 2));
         });
       }
 
@@ -62,8 +177,8 @@
         }
       }
 
-      function appendPre(message) {
-        var pre = document.getElementById('content');
+      function appendMessage(message) {
+        var pre = document.getElementById('messages');
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
       }
@@ -86,7 +201,7 @@
       }
 
       function responseErrorHandler(response) {
-        appendPre('Error: ' + response.result.error.message);
+        appendMessage('Error: ' + response.result.error.message);
       }
 
       function getToday() {
@@ -126,10 +241,12 @@
 
       function render(isShrimp) {
         if (isShrimp) {
-          yesBlock.style.display = 'block';
+          yesBlock.style.display = 'flex';
         } else {
-          noBlock.style.display = 'block';
+          noBlock.style.display = 'flex';
         }
+
+        loader.style.display = 'none';
       }
 
     </script>
