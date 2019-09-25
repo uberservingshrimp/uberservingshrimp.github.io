@@ -171,7 +171,7 @@
 
       function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-          listMajors();
+          readSheets();
         } else {
           gapi.auth2.getAuthInstance().signIn().catch(responseErrorHandler);
         }
@@ -209,7 +209,7 @@
         return today.toLocaleDateString(undefined, {dateStyle: 'full'});
       }
 
-      function listMajors() {
+      function readSheets() {
         getSheets().then(function(sheetsResponse) {
           var sheets = sheetsResponse.result.sheets;
           var firstSheet = sheets.filter(function(sheet) {
