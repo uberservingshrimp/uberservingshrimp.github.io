@@ -206,25 +206,46 @@
 
       function getToday() {
         var today = new Date();
-        return today.toLocaleDateString(undefined, {dateStyle: 'full'});
+        return today.toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: '2-digit', weekday: 'long'});;
       }
 
       function readSheets() {
         getSheets().then(function(sheetsResponse) {
           var sheets = sheetsResponse.result.sheets;
-          var firstSheet = sheets.filter(function(sheet) {
+          var visibleSheets = sheets.filter(function(sheet) {
             return !sheet.properties.hidden;
-          })[0];
-          getValues(firstSheet.properties.title).then(function(valuesResponse) {
+          });
+          var currentSheet = findCurrentSheet(visibleSheets);
+
+          getValues(currentSheet.properties.title).then(function(valuesResponse) {
             var isShrimp = checkIfShrimp(valuesResponse.result.values);
             render(isShrimp);
           }, responseErrorHandler);
         }, responseErrorHandler);
       }
 
+      function findCurrentSheet(sheets) {
+        var today = new Date();
+        var currentMonth = today.toLocaleDateString(undefined, {month: 'long'});
+        var match = sheets.find(function(sheet) {
+          return sheet.properties.title.includes(currentMonth) && /menu/i.test(sheet.properties.title);
+        });
+
+        if (match) {
+          return match;
+        }
+
+        match = sheets.find(function(sheet) {
+          return sheet.properties.title.includes(currentMonth);
+        });
+
+        return match || sheets[0];
+      }
+
       function checkIfShrimp(values) {
         var dateStrings = values[0];
-        var dishStrings = values[3];
+        var meatDishStrings = values[1];
+        var fishDishStrings = values[2];
         var today = getToday();
         var matchingIndex = dateStrings.findIndex(function(dateString) {
           return dateString === today;
@@ -234,9 +255,9 @@
           return false;
         }
 
-        var dishString = dishStrings[matchingIndex];
+        var regex = /shrimp/i;
 
-        return /shrimp/i.test(dishString);
+        return regex.test(meatDishStrings[matchingIndex]) || regex.test(fishDishStrings[matchingIndex]);
       }
 
       function render(isShrimp) {
